@@ -1,6 +1,18 @@
 import { ApolloServer } from "apollo-server-micro";
 import "reflect-metadata";
-import { buildSchema, Resolver, Query, Arg, ObjectType, Field, ID } from "type-graphql";
+
+import { buildSchema } from "type-graphql";
+import { DogsResolver } from "../../src/schema/dogs.resolver";
+
+/*import { 
+    buildSchema, 
+    Resolver, 
+    Query, 
+    Arg, 
+    ObjectType, 
+    Field, 
+    ID 
+} from "type-graphql";
 
 @ObjectType()
 export class Dog {
@@ -11,19 +23,17 @@ export class Dog {
 @Resolver(Dog)
 export class DogsResolver {
     @Query(() => [Dog])
-    dogs(): Dog[] {
-        return [{ name: "Bo"}, {name: "lassie"}];
+    dog(): Dog[] {
+        return [{ name: "Bo" }, { name: "lassie" }];
     }
-}
+} */
 
 const schema = await buildSchema({
-    resolvers: [DogsResolver]
+    resolvers: [DogsResolver],
 })
-
 const server = new ApolloServer({
     schema,
 });
-
 export const config = {
     api: {
         bodyParser: false,
